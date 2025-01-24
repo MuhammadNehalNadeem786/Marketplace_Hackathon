@@ -1,0 +1,18 @@
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,,,,,
+,,,MARKETPLACE BUILDER,,,,
+,,,TESTING REPORT,,,,
+,,,by Muhammad Nehal Nadeem,,,,
+,,,,,,,
+Test Case ID,Test Case Description,Steps,Expected Result,Actual Result,Severity Level,Assigned To,Remarks
+TC001,Validate product listing page,Open products page > Verify products,Products Display Correctly,Product Listings Appear Perfectly,Low,-,No Bugs Detected
+TC002,Test API error handling,Disconnect API > Refresh Page,Display Error Notification on UI,Display Error Notification on UI,Low,-,Respond Appropriately
+TC003,Check Cart Functionality,Add Item to Cart > Confirm Cart Items,Cart Updates to Show New Addition,Cart Update as Expected,Medium,-,Executed Perfectly
+TC004,Check Out Functionality,Add Item to Cart > Confirm Cart Items,Show Products On Cart,Show Products On Cart,Medium,-,Executed Perfectly
+TC005,Check Search Bar,Search Items if match shows on screen,Show Items Matching User Search,Show Items Matching User Search,High,-,No issue Found
+TC006,Ensure Responsiveness,Inspect > Toolbar Options > Pick Mobile Device,Showing Content Based on Screen Size,Showing Content Based on Screen Size,Medium,-,Full Responsive
+TC007,Individual Product Detail Page,Open Product Page > Click to any product card,Product Page Opens Successfully,Product Page Opens Successfully,Low,-,Done Successfully
