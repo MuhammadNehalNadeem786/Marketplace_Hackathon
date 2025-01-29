@@ -1,76 +1,102 @@
-# Marketplace Project - Development Progress
+# WoodenAspire Marketplace - Deployment and Staging
 
-This document summarizes the development progress of the marketplace project, detailing the activities and outcomes from project initiation to the current stage.
+This document outlines the deployment process and staging environment setup for the WoodenAspire marketplace, detailing the steps taken on Day 6 of development.  This process ensures a smooth transition to production and a robust, real-world-ready platform.
 
-## Project Overview
+## Table of Contents
 
-This marketplace project aims to create a platform for [briefly describe the products or services offered]. It will provide users with a seamless experience for browsing, searching, and purchasing items. The project leverages [mention key technologies, e.g., React, Node.js, a specific CMS, etc.] to deliver a modern and scalable solution.
+* [Objective](#objective)
+* [Key Learning Outcomes](#key-learning-outcomes)
+* [Staging Environment Setup](#staging-environment-setup)
+    * [Hosting Platform Setup](#hosting-platform-setup)
+    * [Configuring Environment Variables](#configuring-environment-variables)
+    * [Deploying to Staging](#deploying-to-staging)
+* [Staging Environment Testing](#staging-environment-testing)
+    * [Testing Types](#testing-types)
+    * [Test Case Report](#test-case-report)
+    * [Performance Testing](#performance-testing)
+* [Project Organization](#project-organization)
+* [Deployment Documentation](#deployment-documentation)
+* [Next Steps](#next-steps) (Optional)
 
-## Development Progress
 
-### Phase 1: Project Setup and Foundation (Days 1-2)
+## Objective
 
-*   **Activities:**
-    *   Defined project scope, requirements, and user stories.
-    *   Set up the development environment, including installing necessary dependencies and configuring tools.
-    *   Selected and integrated key technologies: [List technologies, e.g., React, Sanity CMS, Tailwind CSS].
-    *   Established project structure and version control using Git.
-*   **Outcomes:**
-    *   A well-defined project roadmap.
-    *   A functional development environment.
-    *   A structured GitHub repository with initial project files.
+The primary objective of Day 6 was to prepare the WoodenAspire marketplace for deployment by setting up a staging environment, configuring hosting, and ensuring the application is customer-ready. This involved building upon the testing and optimization efforts from Day 5 to guarantee smooth operation in a production-like setup.  We also established a clear understanding of managing different environments (TRN, DEV, SIT, UAT, PROD, DR).
 
-### Phase 2: Core Feature Development (Days 3-5)
+## Key Learning Outcomes
 
-*   **Activities:**
-    *   Developed core features:
-        *   Product listing page with filtering and sorting options.
-        *   Product details page with images, descriptions, and pricing.
-        *   Shopping cart functionality: adding, removing, and updating items.
-        *   User authentication and authorization.
-        *   Integration with [mention backend systems or APIs, e.g., Sanity CMS, payment gateway].
-    *   Implemented UI/UX design based on provided mockups.
-*   **Outcomes:**
-    *   Functional core features of the marketplace.
-    *   A user-friendly interface.
-    *   Initial API integrations.
+* Set up and configure a staging environment using Vercel.
+* Implement professional environment management practices.
+* Perform thorough testing in the staging environment.
+* Prepare professional deployment documentation.
+* Organize project files and documents in a structured GitHub repository.
 
-### Phase 3: Deployment Preparation and Staging Environment Setup (Day 6)
+## Staging Environment Setup
 
-*   **Activities:**
-    *   Planned the deployment strategy, choosing Vercel for its ease of use and GitHub integration.
-    *   Configured environment variables for different environments (development, staging, production).  Sensitive information is stored securely and not exposed in client-side code.
-    *   Set up the staging environment on Vercel, connecting the GitHub repository and configuring build settings.
-    *   Conducted thorough testing in the staging environment:
-        *   Functional testing using Cypress for end-to-end testing and Postman for API validation.
-        *   Performance testing using Lighthouse to analyze load times and responsiveness.
-        *   Security testing to ensure data protection and secure handling of API keys.
-    *   Documented all test cases in `test_cases.csv`:
+### Hosting Platform Setup
 
-```csv
-Test Case ID,Description,Steps,Expected Result,Actual Result,Status,Remarks
-TC001,Validate product listing,Open product page,Products displayed,Products displayed,Passed,No issues found
-TC002,Test API error handling,Disconnect API > Refresh page,Show fallback message,Fallback message shown,Passed,Handled gracefully
-TC003,Check cart functionality,Add item to cart > Verify cart,Cart updates correctly,Cart updates correctly,Passed,Works as expected
-TC004,Test responsiveness layout,Resize browser window > Check layout,Layout adjusts properly,Layout adjusts properly,Passed,Responsive verified
-// ... more test cases
+* **Platform Choice:** Vercel was selected for its ease of use with Next.js applications and quick deployment capabilities.  Alternatives like Netlify, AWS, and Azure were considered.
+* **Repository Connection:** The GitHub repository was linked to Vercel.
+* **Build Settings:**
+    * Build Command: `npm run build`
+    * Output Directory: `.next`
+* **Deployment Scripts:** Deployment scripts were verified in `package.json`.
+
+### Configuring Environment Variables
+
+* **Local `.env` File:** A `.env` file was created locally to store sensitive information:
+    ```
+    NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+    NEXT_PUBLIC_SANITY_DATASET=production
+    API_KEY=your_api_key
+    ```
+    This file was added to `.gitignore`.
+* **Vercel Environment Variables:** The same environment variables were added to the Vercel dashboard under Environment Settings.
+
+### Deploying to Staging
+
+* **Deployment Trigger:** The initial deployment to the Vercel staging environment was triggered.
+* **Deployment Validation:** After a successful build, the staging URL was accessed and validated:
+    * Navigation between pages was verified.
+    * API calls were tested.
+    * Layout rendering was checked.
+
+## Staging Environment Testing
+
+### Testing Types
+
+* **Functional Testing:** Features like product listing, search, and cart operations were tested.
+* **Performance Testing:** Lighthouse was used to measure speed, responsiveness, and overall performance.
+* **Security Testing:** API communication security and input validation were checked.
+
+### Test Case Report
+
+_(Detailed test case reports should be included here, either directly or linked as separate documents in the `documents/` folder.)_  This section should include specific test cases, expected results, and actual results.
+
+### Performance Testing
+
+_(Detailed performance test results, including Lighthouse scores and specific metrics, should be included here.)_  This could include screenshots or links to reports.
+
+## Project Organization
+
+The project files are organized in the following structure:
+
+```
+src/        - Main application source code
+public/     - Static assets
+documents/ - Reports, test cases, deployment documentation
+README.md  - Project summary and documentation (this file)
 ```
 
-    *   Generated a performance report using Lighthouse and saved it as `performance_report.html`.
-    *   Updated this README.md file with comprehensive project information.
-    *   Organized all project files and documentation in the GitHub repository.
-*   **Outcomes:**
-    *   A fully functional staging environment on Vercel.
-    *   Securely configured environment variables.
-    *   Comprehensive test reports (`test_cases.csv` and `performance_report.html`).
-    *   Well-organized project files and documentation.
+## Deployment Documentation
 
-## Expected Output Achieved
+This `README.md` file serves as the primary deployment documentation.  Further details, such as specific configurations and troubleshooting steps, can be added to the `documents/` folder.
 
-*   Deployed staging environment accessible via Vercel.
-*   Securely managed environment variables.
-*   Detailed test case and performance reports.
-*   Organized project files and documentation in the GitHub repository.
-*   Comprehensive README.md file.
+## Next Steps (Optional)
 
-This project has successfully reached the staging phase, demonstrating the core functionality of the marketplace and its readiness for further testing and refinement. The structured approach to development, testing, and documentation has laid a strong foundation for the project's continued success.  The next steps will focus on finalizing the remaining features, ensuring a smooth user experience, and ultimately deploying the application to production.  This project is on track to deliver a valuable platform for [reiterate the project's purpose and target audience].
+* Implement continuous integration/continuous deployment (CI/CD) pipelines.
+* Set up monitoring and logging for the production environment.
+* Document any known issues or limitations.
+* Prepare for User Acceptance Testing (UAT).
+
+This structured approach to deployment and documentation ensures a maintainable and scalable platform for the WoodenAspire marketplace.
