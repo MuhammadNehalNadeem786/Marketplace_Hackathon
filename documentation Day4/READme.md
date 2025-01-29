@@ -1,4 +1,3 @@
-```markdown
 # Day 4 - Building Dynamic Frontend Components for Your Marketplace
 
 ## Objective
