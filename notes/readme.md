@@ -1,4 +1,4 @@
-```markdown
+
 # Marketplace Technical Foundation - General eCommerce
 
 ## Table of Contents
