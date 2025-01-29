@@ -85,4 +85,4 @@ Define the necessary API endpoints based on your system architecture.
   "price": 100
 }
 
-This `README.md` provides a comprehensive overview of the system architecture, API documentation, workflows, Sanity CMS schemas, and collaboration processes. It’s ready to be shared with your team and used as a reference throughout the hackathon.
+##This `README.md` provides a comprehensive overview of the system architecture, API documentation, workflows, Sanity CMS schemas, and collaboration processes. It’s ready to be shared with your team and used as a reference throughout the hackathon.
