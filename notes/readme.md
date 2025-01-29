@@ -1,88 +1,184 @@
-# Marketplace Project - Technical Plan
-
-## Overview
-This document outlines the technical plan for the development of a marketplace project. The goal is to turn the business requirements into a structured technical blueprint, focusing on system architecture, API design, and workflow specification.
+```markdown
+# Marketplace Technical Foundation - General eCommerce
 
 ## Table of Contents
-1. [Technical Requirements](#technical-requirements)
-   - [Frontend Requirements](#frontend-requirements)
-   - [Backend Requirements](#backend-requirements)
-   - [Third-Party API Integrations](#third-party-api-integrations)
-2. [System Architecture](#system-architecture)
-   - [Architecture Diagram](#architecture-diagram)
-   - [Workflows](#workflows)
-3. [API Requirements](#api-requirements)
-   - [API Endpoints](#api-endpoints)
-   - [API Specifications](#api-specifications)
-4. [Technical Documentation](#technical-documentation)
-   - [System Architecture Overview](#system-architecture-overview)
-   - [API Documentation](#api-documentation)
-   - [Workflow Descriptions](#workflow-descriptions)
-   - [Sanity CMS Schema Examples](#sanity-cms-schema-examples)
+1. [System Architecture Overview](#system-architecture-overview)
+2. [Key Workflows](#key-workflows)
+3. [API Endpoints](#api-endpoints)
+4. [Sanity CMS Schema Examples](#sanity-cms-schema-examples)
 5. [Collaboration and Refinement](#collaboration-and-refinement)
 6. [Key Outcomes](#key-outcomes)
+7. [Industry Best Practices](#industry-best-practices)
 
 ---
 
-## Technical Requirements
+## 1. System Architecture Overview
 
-### Frontend Requirements
-- **User Interface**: Design a user-friendly interface for browsing products and managing user accounts.
-- **Responsiveness**: Ensure the interface is responsive for both mobile and desktop devices.
-- **Essential Pages**: Develop the following pages:
-  - Home
-  - Product Listings
-  - Product Details
-  - Cart
-  - Checkout
-  - Order Confirmation
+The system architecture for the General eCommerce marketplace consists of three main components: **Frontend**, **Backend (Sanity CMS)**, and **Third-Party APIs**. Below is a high-level diagram illustrating their interaction:
 
-### Backend Requirements (with Sanity CMS)
-- **Sanity CMS Setup**: Set up Sanity CMS as the backend to manage product data, customer details, and orders.
-- **Schemas**: Create schemas in Sanity CMS to represent marketplace data (e.g., products, orders, customers).
+```
++-------------------+       +-------------------+       +-------------------+
+|     Frontend      |<----->|   Sanity CMS      |<----->|  Third-Party APIs |
+| (Next.js)         | HTTP  | (Backend)         | HTTP  | (Payment, Shipping)|
++-------------------+       +-------------------+       +-------------------+
+```
 
-### Third-Party API Integrations
-- **Shipment Tracking**: Integrate shipment tracking APIs to track product deliveries.
-- **Payment Gateway**: Implement a payment gateway API for handling transactions securely.
+### Key Components:
+- **Frontend (Next.js)**: Handles user interactions and displays product data, cart details, and order information.
+- **Sanity CMS**: Manages product data, customer details, and order records. Acts as the backend database.
+- **Third-Party APIs**: Integrates payment gateways (e.g., Stripe) and shipment tracking services.
 
----
-
-## System Architecture
-
-### Architecture Diagram
-Create a system architecture diagram that shows how the different components (frontend, backend with Sanity, third-party APIs) will communicate.
-
-**Example Architecture**:
-- **Frontend (Next.js)**: Communicates with Sanity CMS to fetch product data.
-- **Third-Party APIs**: Handle shipment tracking.
-- **Payment Gateway**: Processes transactions.
-
-### Workflows
-- **User Registration**: When a user registers, their data is stored in Sanity CMS.
-- **Product Browsing**: The frontend fetches product data from Sanity CMS.
-- **Order Placement**: When a user places an order, the order data is stored in Sanity CMS.
-- **Shipment Tracking**: Track shipments via a third-party API.
+### Data Flow:
+1. **Product Browsing**: 
+   - User visits the marketplace and browses products.
+   - Frontend fetches product data from Sanity CMS via API.
+2. **Cart Management**:
+   - User adds products to the cart.
+   - Cart data is stored temporarily in the frontend or Sanity CMS.
+3. **Order Placement**:
+   - User proceeds to checkout.
+   - Frontend sends order details to Sanity CMS for storage.
+   - Payment is processed via a third-party payment gateway.
+4. **Shipment Tracking**:
+   - Order status and shipment details are fetched from a third-party API and displayed to the user.
 
 ---
 
-## API Requirements
+## 2. Key Workflows
 
-### API Endpoints
-Define the necessary API endpoints based on your system architecture.
+### 1. Product Browsing
+1. User visits the marketplace homepage.
+2. Frontend requests product data from Sanity CMS via `GET /products`.
+3. Sanity CMS returns product details (name, price, description, image).
+4. Frontend displays the products in a user-friendly interface.
 
-**API Endpoint Examples**:
-- **Product Endpoint (GET /products)**: Retrieve a list of products from Sanity CMS.
-- **Order Endpoint (POST /orders)**: Create a new order in Sanity CMS.
-- **Shipment Endpoint (GET /shipment)**: Get the shipment status from a third-party API.
+### 2. Cart Management
+1. User adds a product to the cart.
+2. Frontend updates the cart state and sends a `POST /cart` request to Sanity CMS.
+3. Sanity CMS stores the cart data and returns a confirmation.
 
-### API Specifications
+### 3. Order Placement
+1. User proceeds to checkout.
+2. Frontend sends a `POST /orders` request to Sanity CMS with order details (customer info, products, total amount).
+3. Payment is processed via a third-party payment gateway (e.g., Stripe).
+4. Sanity CMS records the order and sends a confirmation to the user.
 
-**Product Endpoint Example Response**:
-```json
-{
-  "id": 1,
-  "name": "Product A",
-  "price": 100
-}
+### 4. Shipment Tracking
+1. User views their order history via `GET /orders`.
+2. Frontend fetches shipment tracking details from a third-party API.
+3. Shipment status is displayed to the user in real-time.
 
-##This `README.md` provides a comprehensive overview of the system architecture, API documentation, workflows, Sanity CMS schemas, and collaboration processes. It’s ready to be shared with your team and used as a reference throughout the hackathon.
+---
+
+## 3. API Endpoints
+
+### 1. `GET /products`
+- **Purpose**: Fetch all available products.
+- **Response**:
+  ```json
+  {
+    "products": [
+      {
+        "id": 1,
+        "name": "Product A",
+        "price": 100,
+        "description": "A sample product.",
+        "image": "https://example.com/productA.jpg"
+      }
+    ]
+  }
+  ```
+
+### 2. `POST /cart`
+- **Purpose**: Add a product to the cart.
+- **Request**:
+  ```json
+  {
+    "productId": 1,
+    "quantity": 2
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "message": "Product added to cart.",
+    "cartId": "12345"
+  }
+  ```
+
+### 3. `POST /orders`
+- **Purpose**: Create a new order.
+- **Request**:
+  ```json
+  {
+    "customerId": 101,
+    "products": [
+      {"id": 1, "quantity": 2}
+    ],
+    "total": 200
+  }
+  ```
+- **Response**:
+  ```json
+  {
+    "message": "Order placed successfully.",
+    "orderId": "67890"
+  }
+  ```
+
+### 4. `GET /shipment`
+- **Purpose**: Fetch shipment tracking details.
+- **Response**:
+  ```json
+  {
+    "orderId": "67890",
+    "status": "In Transit",
+    "ETA": "2025-01-20"
+  }
+  ```
+
+---
+
+## 4. Sanity CMS Schema Examples
+
+### Product Schema
+```javascript
+export default {
+  name: 'product',
+  type: 'document',
+  fields: [
+    { name: 'name', type: 'string', title: 'Product Name' },
+    { name: 'price', type: 'number', title: 'Price' },
+    { name: 'description', type: 'text', title: 'Description' },
+    { name: 'image', type: 'image', title: 'Product Image' },
+    { name: 'stock', type: 'number', title: 'Stock Level' }
+  ]
+};
+```
+
+---
+
+## 5. Collaboration and Refinement
+
+### Collaboration Tools:
+- **Slack/Discord**: For team discussions and brainstorming.
+- **GitHub**: For version control and collaborative document editing.
+- **Google Meet**: For virtual meetings and feedback sessions.
+
+### Refinement Process:
+1. Share your technical plan with teammates for feedback.
+2. Use GitHub to track changes and improvements.
+3. Incorporate feedback to refine system architecture, workflows, and API documentation.
+
+---
+
+## 6. Key Outcomes
+
+By the end of Day 2, you should have:
+1. A **Technical Plan** aligned with business goals.
+2. A **System Architecture Diagram** showing component interactions.
+3. **Detailed API Documentation** for all endpoints.
+4. **Sanity CMS Schema Designs** for product and order management.
+5. **Workflow Diagrams** for user and admin interactions.
+
+This `README.md` is structured for your repository and provides a clear, concise, and professional overview of the technical foundation for your General eCommerce marketplace. It includes all necessary sections, code snippets, and diagrams for easy reference and collaboration.
