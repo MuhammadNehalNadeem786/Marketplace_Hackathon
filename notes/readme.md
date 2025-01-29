@@ -85,35 +85,4 @@ Define the necessary API endpoints based on your system architecture.
   "price": 100
 }
 
-# Technical Documentation
-
-## System Architecture Overview
-
-The system architecture consists of three main components: **Frontend**, **Backend**, and **APIs**. Below is a visual representation of how they interact:
-
-- **Frontend**: Handles user interactions and displays data.
-- **Backend**: Manages business logic, database interactions, and API integrations.
-- **APIs**: Facilitates communication between the frontend, backend, and external services.
-
----
-
-## API Documentation
-
-### Endpoint 1: `GET /products`
-- **Purpose**: Retrieve a list of products.
-- **Request**: `GET /products`
-- **Response**:
-  ```json
-  {
-    "products": [
-      {
-        "id": 1,
-        "name": "Product A",
-        "price": 19.99,
-        "description": "A sample product."
-      }
-    ]
-  }
-
-
 This `README.md` provides a comprehensive overview of the system architecture, API documentation, workflows, Sanity CMS schemas, and collaboration processes. It’s ready to be shared with your team and used as a reference throughout the hackathon.
