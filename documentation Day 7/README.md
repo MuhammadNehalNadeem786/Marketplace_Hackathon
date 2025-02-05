@@ -1,4 +1,4 @@
-# Day 7: Live Deployment and Post-Launch Practices - Furniro Marketplace
+# Day 7: Live Deployment and Post-Launch Practices - Furniro Marketplace .
 
 This document details the activities and learnings from Day 7 of our hackathon, focusing on live deployment and post-launch practices for the Furniro marketplace.
 
